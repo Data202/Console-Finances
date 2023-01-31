@@ -22,4 +22,4 @@ To help companies and invidual financial break and track changes
 
 * The URL of the deployed application -  https://data202.github.io/Console-Finances/
 
-* The URL of the GitHub repository - git@github.com:Data202/Console-Finances.git
+* The URL of the GitHub repository - https://github.com/Data202/Console-Finances.git
