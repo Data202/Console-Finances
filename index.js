@@ -1,4 +1,4 @@
-var finances = [
+var  finances = [
   ['Jan-2010', 867884],
   ['Feb-2010', 984655],
   ['Mar-2010', 322013],
@@ -86,55 +86,45 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099]
   ];
-  
-  
-      var months = finances.length;
-  var total = 0;
-  var change = 0;
-  var average;
-  var analysis
-  var net = 0;
-  var netArray = [];
-  var netChangeSum = 0;
-  var least = ['', 9999999999999];
-  var greatest = ['', 0];
-  
-  
-    // The total number of months included in the dataset 
-  
-  for (var i = 0; i < finances.length; i++) {
-      for (var j = 0; j < finances[i].length; j++) {
-        if(typeof finances[i][j] !== 'string') {
-          total += finances[i][j]
-          change = finances[i][j] - net;
-          net = finances[i][j];
-          netArray.push(change);
-      
-        
-          if (change > greatest[1]) {
-            greatest = [finances[i][0], finances[i][1]];
-          }
-    
-          if (change < least[1]) {
-            least = [finances[i][0], finances[i][1]];
-          }
-        }
-      }
+  // total Number of months
+  var totalMonths= finances.length;
+  // console.log(totalMonths)
+
+//Assuming financial data is in an array of objects called 'financialData'
+
+var total = 0;
+
+var averageChange = 0;
+
+var greatestIncrease = finances[0];
+
+var greatestDecrease = finances[0];
+
+for(var i=0; i<finances.length; i++){
+
+    //Calculating total profit/loss
+    total += finances[i].profit;
+
+    //Calculating average change
+    if(i>0){
+        averageChange += finances[i].profit - finances[i-1].profit;
     }
-  
-  
-  //   total profits and losses
-    for (var i = 0; i < netArray.length; i++) {
-      netChangeSum += netArray[i];
+
+    //Finding greatest increase and decrease in profits
+    if(finances[i].profit > greatestIncrease.profit){
+        greatestIncrease = finances[i];
     }
-    
-    average = Math.round((netChangeSum / 86) * 100) / 100;
-    
-    analysis = 'Financial Analysis ' + 'below:' + '\n' + 
-    'Total Months: ' + months + '\n' + 
-    'Total: $' + total + '\n' + 
-    'Average Change: ' + average + '\n' + 
-    'Greatest Increase: ' + greatest[0] + ': $' + greatest[1] + '\n' + 
-    'Greatest Decrease: ' + least[0] + ': $' + least[1];
-    
-    console.log(analysis);
+
+    if(finances[i].profit < greatestDecrease.profit){
+        greatestDecrease = finances[i];
+    }
+}
+
+averageChange = averageChange/(finances.length-1);
+
+console.log("Financial Analysis");
+console.log("Total Months: " + totalMonths);
+console.log("Total: $" + total);
+console.log("Average Change: $" + averageChange.toFixed(2));
+console.log("Greatest Increase in Profits: " + greatestIncrease.month + " ($" + greatestIncrease.profit + ")");
+console.log("Greatest Decrease in Profits: " + greatestDecrease.month + " ($" + greatestDecrease.profit + ")");
